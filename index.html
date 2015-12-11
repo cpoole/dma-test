@@ -13,7 +13,8 @@
 		<script src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
 		<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   	<script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-		<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>	
+		<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="/js/dirPagination.js"></script>
     <script src="/js/index.js"></script>
    
 		<!--css includesi-->
@@ -34,30 +35,38 @@
 
 			</md-content>
 			<md-content>
-				<md-list layout-align="space-around">
-					<md-list-item class="md-2-line" ng-repeat="movie in movieEntries | filter:searchQuery | orderBy:'title'">
-						<md-card layout="row" style="width:75%">
-							<md-card-title layout="row" layout-align="space-around start">
-								<md-card-title-media>
-									<div class="md-media-lg card-media card-picture">
-										<img ng-src="{{movie.image}}" />	
-									</div>
-								</md-card-title-media>
-								<md-card-title-text>
-									<span class="md-headline">{{movie.title}} </span>
-									<span class='md-subhead'> {{movie.rating}}</span>
-								</md-card-title-text>
-							</md-card-title>
-							<md-card-actions layout="row" layout-align="end center">
-	           			<md-button>Add to Watchlist</md-button>
-								</md-card-actions>
-						</md-card>
-										
-					</md-list-item>
-				</md-list>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<md-list layout-align="space-around">
+							<md-list-item class="md-2-line" dir-paginate="movie in movieEntries | filter:searchQuery | orderBy:'title' | itemsPerPage: pageSize" current-page="currentPage">
+								<md-card layout="row" style="width:75%">
+									<md-card-title layout="row" layout-align="space-around start">
+										<md-card-title-media>
+											<div class="md-media-lg card-media card-picture">
+												<img ng-src="{{movie.image}}" />	
+											</div>
+										</md-card-title-media>
+										<md-card-title-text>
+											<span class="md-headline">{{movie.title}} </span>
+											<span class='md-subhead'> {{movie.rating}}</span>
+										</md-card-title-text>
+									</md-card-title>
+									<md-card-actions layout="row" layout-align="end center">
+	    		       			<md-button>Add to Watchlist</md-button>
+										</md-card-actions>
+								</md-card>
+												
+							</md-list-item>
+						</md-list>
+					</div>
+				</div>
 						
 			</md-content>
 		</div>
+		<div ng-contoller="pageNumController" layout="row" layout-align= "center center" >
+			<dir-pagination-controls boundary-links="true" template-url="/html/dirPagination.tpl.html" ></dir-pagination-controls>
+		</div>
+
 	</body>
 
 </html>

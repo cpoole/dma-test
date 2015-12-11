@@ -11,8 +11,9 @@ Number.prototype.secondsToHHMMSS = function () {
 	return time;
 }
 
-angular.module('indexApp', ['ngMaterial', 'ui.bootstrap'])
-	.controller('listController', function($scope){
+var myApp = angular.module('indexApp', ['ngMaterial',  'angularUtils.directives.dirPagination'])
+
+function listController($scope){
 		$scope.capFirstLetters = function capFirstLetters(str){
 			// \w matches and word character
 			// \S matches any non white-space characters
@@ -158,13 +159,25 @@ angular.module('indexApp', ['ngMaterial', 'ui.bootstrap'])
 		for( var i=0; i < $scope.rawData.length; i++) {
 			$scope.movieEntries.push(new $scope.MovieInfo($scope.rawData[i]))
 		}
-	
+
+		$scope.currentPage = 1;
+		$scope.pageSize = 5;
+		
 		//console.log($scope.movieEntries[0].date.toDateString())
-	})
-	.config(function($mdThemingProvider){
+};
+
+myApp.config(function($mdThemingProvider){
 		$mdThemingProvider.theme('docs-dark', 'default')
 			.primaryPalette('blue')
 			.accentPalette('grey')
 			.dark();
 	});
 
+function pageNumController($scope){
+	$scope.pageChangeHandler = function(num){
+		console.log('going to page ' + num);
+	};
+};
+
+myApp.controller('listController', listController);
+myApp.controller('pageNumController', pageNumController);
