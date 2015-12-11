@@ -46,14 +46,30 @@
 												<img ng-src="{{movie.image}}" />	
 											</div>
 										</md-card-title-media>
-										<md-card-title-text>
+									</md-card-title>
+									<div layout="column" layout-align="space-between" style="margin-top:10px">
+										<div layout="row" layout-align="space-between end">
+
 											<span class="md-headline">{{movie.title}} </span>
 											<span class='md-subhead'> {{movie.rating}}</span>
-										</md-card-title-text>
-									</md-card-title>
-									<md-card-actions layout="row" layout-align="end center">
+
+										</div>
+										<md-card-actions layout="row" layout-align="center">
 	    		       			<md-button>Add to Watchlist</md-button>
 										</md-card-actions>
+								 	</div>
+									<div layout="column" layout-align="center" style="width:100%; margin:10px">
+										<div layout="row" layout-align="space-between">
+											<span>Release Date</span>
+											<span>{{ movie.date.toDateString() }}</span>
+										</div>
+										<div layout="row" layout-align="space-between">
+											<span>Run Time</span>
+											<span>{{ movie.formattedRuntime }}</span>
+									</div>
+									
+
+					
 								</md-card>
 												
 							</md-list-item>
