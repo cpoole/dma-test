@@ -1,0 +1,25 @@
+{
+  "name": "dma-test",
+  "version": "0.0.1",
+  "homepage": "https://github.com/cpoole/dma-test",
+  "authors": [
+    "Connor Poole"
+  ],
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": null,
+		"angular-animate" : null,
+		"angular-aria" : null,
+    "angular-material": null
+  },
+  "description": "interview questions",
+  "main": ""
+}
