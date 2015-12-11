@@ -16,9 +16,12 @@
   ],
   "dependencies": {
     "angular": null,
-		"angular-animate" : null,
-		"angular-aria" : null,
-    "angular-material": null
+    "angular-animate": null,
+    "angular-aria": null,
+    "angular-material": null,
+    "ui.bootstrap": "~0.14.3",
+    "bootstrap": "~3.3.6",
+    "angular-bootstrap": "~0.14.3"
   },
   "description": "interview questions",
   "main": ""

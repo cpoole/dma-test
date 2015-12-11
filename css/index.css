@@ -1,3 +1,6 @@
 .card-picture {
 	margin: 10px;
+	max-height: 292px;
+	min-width: 195px;
+	overflow: hidden;
 }
