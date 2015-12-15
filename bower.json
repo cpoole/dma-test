@@ -21,7 +21,8 @@
     "angular-material": null,
     "ui.bootstrap": "~0.14.3",
     "bootstrap": "~3.3.6",
-    "angular-bootstrap": "~0.14.3"
+    "angular-bootstrap": "~0.14.3",
+    "angular-ui-router": "~0.2.15"
   },
   "description": "interview questions",
   "main": ""

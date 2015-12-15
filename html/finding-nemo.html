@@ -1,4 +1,4 @@
-<html lang="en" ng-app="indexApp">
+<html lang="en" ng-app="movieApp">
 
 	<head>
 		<title>DMA-TEST</title>
@@ -7,7 +7,6 @@
    	
 		<!--javascript includes-->
     <script src="/bower_components/angular/angular.min.js"></script>
-		<script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/bower_components/angular-material/angular-material.min.js"></script>
 		<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
 		<script src="/bower_components/angular-aria/angular-aria.min.js"></script>
@@ -17,7 +16,7 @@
 		<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 		<script src="/js/dirPagination.js"></script>
 		<script src="/js/helpers.js"></script>
-    <script src="/js/index.js"></script>
+    <script src="/js/movie.js"></script>
    
 		<!--css includesi-->
 		<link rel="stylesheet" href="/bower_components/angular-material/angular-material.css"></link>
@@ -28,9 +27,43 @@
 	</head>
 
 	<body>
-		<div ui-view >
-			
+		<div ng-controller="movieController" layout="column">
+			<md-content md-theme="docs-dark" layout-padding layout="row" layout-align="center-center">
+			</md-content>
+			<md-content>
+				<md-card layout="row" style="width:75%">
+					<md-card-title layout="row" layout-align="space-around start">
+						<md-card-title-media>
+							<div class="md-media-lg card-media card-picture">
+								<a href="/{{featuredMovie.slug}}">
+									<img ng-src="{{featuredMovie.image}}" />
+								</a>
+							</div>
+						</md-card-title-media>
+					</md-card-title>
+					<div layout="column" layout-align="space-between" style="margin-top:10px">
+						<div layout="row" layout-align="space-between end">
+
+							<span class="md-headline">{{featuredMovie.title}} </span>
+							<span class='md-subhead'> {{featuredMovie.rating}}</span>
+
+						</div>
+						<md-card-actions layout="row" layout-align="center">
+	  	   			<md-button>Add to Watchlist</md-button>
+						</md-card-actions>
+				 	</div>
+					<div layout="column" layout-align="center" style="width:100%; margin:10px">
+						<div layout="row" layout-align="space-between">
+							<span>Release Date</span>
+							<span>{{ featuredMovie.date.toDateString() }}</span>
+						</div>
+						<div layout="row" layout-align="space-between">
+							<span>Run Time</span>
+							<span>{{ featuredMovie.formattedRuntime }}</span>
+					</div>
+		
+				</md-card>
+			</md-content>
 		</div>
 	</body>
-
 </html>

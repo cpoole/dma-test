@@ -1,59 +1,4 @@
-Number.prototype.secondsToHHMMSS = function () {
-	var sec_num = parseInt(this, 10); // don't forget the second param
-	var hours   = Math.floor(sec_num / 3600);
-	var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-	var seconds = sec_num - (hours * 3600) - (minutes * 60);
-	
-	if (hours   < 10) {hours   = "0"+hours;}
-	if (minutes < 10) {minutes = "0"+minutes;}
-	if (seconds < 10) {seconds = "0"+seconds;}
-	var time    = hours+':'+minutes+':'+seconds;
-	return time;
-}
-
-var myApp = angular.module('indexApp', ['ngMaterial',  'angularUtils.directives.dirPagination'])
-
-function listController($scope){
-		$scope.capFirstLetters = function capFirstLetters(str){
-			// \w matches and word character
-			// \S matches any non white-space characters
-			// this regex should return a list of each word
-			return str.replace(/\w\S*/g, function(txt){
-				return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-			});
-		};
-		
-		$scope.MovieInfo = function MovieInfo(rawInfo){
-			this.title = $scope.capFirstLetters(rawInfo.title)
-			this.image = rawInfo.image
-			this.slug = rawInfo.slug
-			this.rating = rawInfo.rating.toUpperCase()
-			this.run_time = rawInfo.run_time
-			Object.defineProperty(this, "formattedRuntime",{
-				get: function(){
-					runStringArray = rawInfo.run_time.secondsToHHMMSS().split(":");
-					if(runStringArray[0].charAt(0) == "0"){
-						runStringArray[0] = runStringArray[0].charAt(1);
-					}
-					runString= runStringArray[0] + "hr " + runStringArray[1] + " mins"; 
-					return runString;
-				}
-			});
-			Object.defineProperty(this, "date",{
-				get : function(){
-					rawArray = rawInfo.date.split("-");
-					console.log(rawArray)
-					var formattedDate = new Date();
-					formattedDate.setYear(rawArray[0])
-					formattedDate.setMonth(rawArray[1]);
-					formattedDate.setDate(rawArray[2]);
-					return formattedDate;
-				}
-			});
-
-		};
-
-		$scope.rawData = [ 
+rawData = [ 
     	{
     	    "image": "https://cdn-thumbs.disneymoviesanywhere.com/thumbs/1/115/movie-thumb_1c02f92da5b7c_web.jpg",
     	    "title": "Toy Story",
@@ -153,25 +98,51 @@ function listController($scope){
     	    "rating": "G",
     	    "run_time": 6230
     	}
-		];
-  	
-		$scope.movieEntries = [];
-		for( var i=0; i < $scope.rawData.length; i++) {
-			$scope.movieEntries.push(new $scope.MovieInfo($scope.rawData[i]))
-		}
+];
 
-		$scope.currentPage = 1;
-		$scope.pageSize = 5;
-		
-		//console.log($scope.movieEntries[0].date.toDateString())
+var myApp = angular.module('indexApp', ['ngMaterial', 'angularUtils.directives.dirPagination', 'ui.router'])
+
+myApp.config(function($mdThemingProvider, $urlRouterProvider, $stateProvider){
+	$mdThemingProvider.theme('docs-dark', 'default')
+		.primaryPalette('blue')
+		.accentPalette('grey')
+		.dark();
+	$urlRouterProvider.otherwise('/index.html');
+	$stateProvider
+		.state('home', {
+			url: '/',
+			views:{
+				'primaryList' : {
+					templateUrl : '/html/homeListView.html',
+					controller : 'indexController'
+				},
+				'paginationIcons' : {
+					templateUrl : '/html/homePaginationIcons.html',
+					controller : 'pageNumController'
+				}
+		});
+	//	.state('/movies/toy-story' , {
+	//		templateURL : 'pages/toyStory.html',
+	//		controller : 'movieController'
+	//	});
+});
+
+function indexController($scope){
+	$scope.capFirstLetters = capFirstLetters
+
+	$scope.MovieInfo = MovieInfo
+
+	$scope.rawData = rawData;  	
+	$scope.movieEntries = [];
+	for( var i=0; i < $scope.rawData.length; i++) {
+		$scope.movieEntries.push(new $scope.MovieInfo($scope.rawData[i]))
+	}
+
+	$scope.currentPage = 1;
+	$scope.pageSize = 5;
+	
+	//console.log($scope.movieEntries[0].date.toDateString())
 };
-
-myApp.config(function($mdThemingProvider){
-		$mdThemingProvider.theme('docs-dark', 'default')
-			.primaryPalette('blue')
-			.accentPalette('grey')
-			.dark();
-	});
 
 function pageNumController($scope){
 	$scope.pageChangeHandler = function(num){
@@ -179,5 +150,25 @@ function pageNumController($scope){
 	};
 };
 
-myApp.controller('listController', listController);
+function movieController($scope, $location){
+	$scope.capFirstLetters = capFirstLetters
+
+	$scope.MovieInfo = MovieInfo
+	
+	locationArray = $location.url.split('/')
+		
+	for(var i=0; i<$scope.rawData.length; i++){
+		if(locationArray[locationArray.length] == $scope.rawData[i])	{
+			$scope.featuredMovie = MovieInfo($scope.rawData[i]);
+			break;
+		}
+	}
+		
+	console.log($location.url)
+
+};
+
+
+myApp.controller('indexController', indexController);
+myApp.controller('movieController', movieController);
 myApp.controller('pageNumController', pageNumController);
