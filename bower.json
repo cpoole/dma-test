@@ -19,10 +19,10 @@
     "angular-animate": null,
     "angular-aria": null,
     "angular-material": null,
-    "ui.bootstrap": "~0.14.3",
-    "bootstrap": "~3.3.6",
-    "angular-bootstrap": "~0.14.3",
-    "angular-ui-router": "~0.2.15"
+    "ui.bootstrap": null,
+    "bootstrap": null,
+    "angular-bootstrap": null,
+    "angular-ui-router":null 
   },
   "description": "interview questions",
   "main": ""

@@ -1,9 +1,15 @@
 <div layout="column">
-	<md-content md-theme="docs-dark" layout-padding layout="row" layout-align="center-center">
-			<md-input-container>
+	<md-content md-theme="docs-dark" layout-padding layout="row" layout-align="space-around center" style="min-height:100px">
+			<md-input-container style="height:80px">
 					<label>Search</label>
-					<input ng-model="searchQuery" type="text">
+					<input ng-model="searchQuery" type="text" style="min-width:300px">
 			</md-input-container>
+        <md-input-container style="height:80px">
+            <label>Filter</label>
+            <md-select ng-model="selectedFilter" ng-model-options="{trackBy: '$value.title'}">
+          <md-option ng-repeat"filter in filterOptions" ng-value="{{filter}}">{{filter}}</md-option>
+      </md-select>
+        </md-input-container>
 
 	</md-content>
 	<md-content>
@@ -14,8 +20,8 @@
 						<md-card layout="row" style="width:75%">
 							<md-card-title layout="row" layout-align="space-around start">
 								<md-card-title-media>
-									<div class="md-media-lg card-media card-picture">
-										<a href="/{{movie.slug}}">
+									<div class="card-picture md-media-lg card-media" style="height:292px">
+                    <a ui-sref="movie({movieSlug : movie.slug})">
 											<img ng-src="{{movie.image}}" />
 										</a>
 									</div>

@@ -110,34 +110,38 @@ myApp.config(function($mdThemingProvider, $urlRouterProvider, $stateProvider){
 	$urlRouterProvider.otherwise('/index.html');
 	$stateProvider
 		.state('home', {
-			url: '/',
+			url: '',
 			views:{
-				'primaryList' : {
+        '': {
+          templateUrl : '/html/home.html'
+        },
+				'primaryList@home' : {
 					templateUrl : '/html/homeListView.html',
 					controller : 'indexController'
 				},
-				'paginationIcons' : {
+				'paginationIcons@home' : {
 					templateUrl : '/html/homePaginationIcons.html',
 					controller : 'pageNumController'
 				}
-		});
-	//	.state('/movies/toy-story' , {
-	//		templateURL : 'pages/toyStory.html',
-	//		controller : 'movieController'
-	//	});
+      }
+		})
+    .state('movie', {
+        url: '/movie/{movieSlug}',
+        templateUrl : '/html/singleMovie.html',
+        controller : 'movieController'
+    });
 });
 
 function indexController($scope){
-	$scope.capFirstLetters = capFirstLetters
-
-	$scope.MovieInfo = MovieInfo
-
+	//$scope.capFirstLetters = capFirstLetters
+  $scope.selectedFilter = {"title" : "Name"};
+  $scope.filterOptions = [{"title":"Name"},{"title":"Date"}];
 	$scope.rawData = rawData;  	
 	$scope.movieEntries = [];
 	for( var i=0; i < $scope.rawData.length; i++) {
-		$scope.movieEntries.push(new $scope.MovieInfo($scope.rawData[i]))
+		$scope.movieEntries.push(new MovieInfo($scope.rawData[i]))
 	}
-
+  //console.log($scope.movieEntries)
 	$scope.currentPage = 1;
 	$scope.pageSize = 5;
 	
@@ -150,24 +154,18 @@ function pageNumController($scope){
 	};
 };
 
-function movieController($scope, $location){
+function movieController($scope, $stateParams){
 	$scope.capFirstLetters = capFirstLetters
-
-	$scope.MovieInfo = MovieInfo
-	
-	locationArray = $location.url.split('/')
-		
+    
+  $scope.rawData = rawData	
+  console.log($stateParams)
 	for(var i=0; i<$scope.rawData.length; i++){
-		if(locationArray[locationArray.length] == $scope.rawData[i])	{
-			$scope.featuredMovie = MovieInfo($scope.rawData[i]);
+		if($stateParams.movieSlug  == $scope.rawData[i].slug)	{
+			$scope.featuredMovie = new MovieInfo($scope.rawData[i]);
 			break;
 		}
 	}
-		
-	console.log($location.url)
-
 };
-
 
 myApp.controller('indexController', indexController);
 myApp.controller('movieController', movieController);

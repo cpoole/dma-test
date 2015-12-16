@@ -20,7 +20,6 @@ function capFirstLetters(str){
 	});
 };
 
-
 function MovieInfo(rawInfo){
 	this.title = capFirstLetters(rawInfo.title)
 	this.image = rawInfo.image
@@ -40,7 +39,6 @@ function MovieInfo(rawInfo){
 	Object.defineProperty(this, "date",{
 		get : function(){
 			rawArray = rawInfo.date.split("-");
-			console.log(rawArray)
 			var formattedDate = new Date();
 			formattedDate.setYear(rawArray[0])
 			formattedDate.setMonth(rawArray[1]);
