@@ -26,6 +26,7 @@ function MovieInfo(rawInfo){
 	this.slug = rawInfo.slug
 	this.rating = rawInfo.rating.toUpperCase()
 	this.run_time = rawInfo.run_time
+	this.raw_date = rawInfo.date
 	Object.defineProperty(this, "formattedRuntime",{
 		get: function(){
 			runStringArray = rawInfo.run_time.secondsToHHMMSS().split(":");

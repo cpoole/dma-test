@@ -19,10 +19,10 @@
     "angular-animate": null,
     "angular-aria": null,
     "angular-material": null,
-    "ui.bootstrap": null,
-    "bootstrap": null,
     "angular-bootstrap": null,
-    "angular-ui-router":null 
+    "angular-ui-router": null,
+    "bootstrap": null,
+    "angularUtils-pagination": "angular-utils-pagination#~0.9.3"
   },
   "description": "interview questions",
   "main": ""
