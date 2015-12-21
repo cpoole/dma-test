@@ -1,0 +1,37 @@
+<div layout="column" layout-align="center center">
+	<md-content md-theme="docs-dark" layout-padding layout="row" layout-align="center-center" style="min-height:100px; min-width: 100%">
+	</md-content>
+	<md-content style="width:75%">
+		<md-card layout="row">
+			<md-card-title layout="row" layout-align="space-around">
+				<md-card-title-media>
+					<div class="md-media-lg card-media card-picture" style="height:292px">
+							<img ng-src="{{featuredMovie.image}}" />
+						</a>
+					</div>
+				</md-card-title-media>
+			</md-card-title>
+			<div layout="column" layout-align="space-between" style="margin-top:10px">
+				<div layout="row" layout-align="space-between end">
+
+					<span class="md-headline">{{featuredMovie.title}} </span>
+					<span class='md-subhead'> {{featuredMovie.rating}}</span>
+
+				</div>
+				<md-card-actions layout="row" layout-align="center">
+     			<md-button>Add to Watchlist</md-button>
+				</md-card-actions>
+		 	</div>
+			<div layout="column" layout-align="center" style="width:100%; margin:10px">
+				<div layout="row" layout-align="space-between">
+					<span>Release Date</span>
+					<span>{{ featuredMovie.date.toDateString() }}</span>
+				</div>
+				<div layout="row" layout-align="space-between">
+					<span>Run Time</span>
+					<span>{{ featuredMovie.formattedRuntime }}</span>
+			</div>
+	
+		</md-card>
+	</md-content>
+</div>

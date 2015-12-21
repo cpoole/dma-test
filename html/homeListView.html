@@ -1,0 +1,58 @@
+<div layout="column">
+	<md-content md-theme="docs-dark" layout-padding layout="row" layout-align="space-around center" style="min-height:100px">
+		<md-input-container style="height:80px">
+				<label>Search</label>
+				<input ng-model="searchQuery" type="text" style="min-width:300px">
+		</md-input-container>
+		<md-input-container style="height:80px">
+			<label>Order By</label>
+			<md-select ng-model="selectedFilter" md-on-close="onFilterChange()" style="min-width:250px">
+				<md-option ng-repeat="filter in filterOptions" ng-value="{{filter}}">{{filter}}</md-option>
+			</md-select>
+		</md-input-container>
+	</md-content>
+
+	<md-content>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<md-list layout-align="space-around">
+					<md-list-item class="md-2-line" dir-paginate="movie in movieEntries | filter: searchQuery | orderBy:orderByParam | itemsPerPage: pageSize" current-page="currentPage">
+						<md-card layout="row" style="width:75%">
+							<md-card-title layout="row" layout-align="space-around start">
+								<md-card-title-media>
+									<div class="card-picture md-media-lg card-media" style="height:292px">
+										<a ui-sref="movie({movieSlug : movie.slug})">
+											<img ng-src="{{movie.image}}" />
+										</a>
+									</div>
+								</md-card-title-media>
+							</md-card-title>
+							<div layout="column" layout-align="space-between" style="margin-top:10px">
+								<div layout="row" layout-align="space-between end">
+
+									<span class="md-headline">{{movie.title}} </span>
+									<span class='md-subhead'> {{movie.rating}}</span>
+
+								</div>
+								<md-card-actions layout="row" layout-align="center">
+									<md-button>Add to Watchlist</md-button>
+								</md-card-actions>
+							</div>
+							<div layout="column" layout-align="center" style="width:100%; margin:10px">
+								<div layout="row" layout-align="space-between">
+									<span>Release Date</span>
+									<span>{{ movie.date.toDateString() }}</span>
+								</div>
+								<div layout="row" layout-align="space-between">
+									<span>Run Time</span>
+									<span>{{ movie.formattedRuntime }}</span>
+							</div>
+							
+						</md-card>
+					</md-list-item>
+				</md-list>
+			</div>
+		</div>
+	</md-content>
+</div>
+

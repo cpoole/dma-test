@@ -2,57 +2,29 @@
 
 	<head>
 		<title>DMA-TEST</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   	
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<!--javascript includes-->
-    <script src="/bower_components/angular/angular.min.js"></script>
-    <script src="/bower_components/angular-material/angular-material.js"></script>
-		<script src="/bower_components/angular-animate/angular-animate.js"></script>
-		<script src="/bower_components/angular-aria/angular-aria.js"></script>
-		
-
-    <script src="/js/index.js"></script>
-   
+		<script src="/bower_components/angular/angular.min.js"></script>
+		<script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="/bower_components/angular-material/angular-material.min.js"></script>
+		<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+		<script src="/bower_components/angular-aria/angular-aria.min.js"></script>
+		<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="/bower_components/angularUtils-pagination/dirPagination.js"></script>
+		<script src="/js/helpers.js"></script>
+		<script src="/js/index.js"></script>
 		<!--css includesi-->
 		<link rel="stylesheet" href="/bower_components/angular-material/angular-material.css"></link>
-		<link	rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">	
+		<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css"></link>
+		<link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css"></link>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">	
 		<link rel="stylesheet" href="/css/index.css"></link>
 	</head>
 
 	<body>
-		<div ng-controller="listController" layout="column">
-			<md-content md-theme="docs-dark" layout-padding layout="row" layout-align="center-center">
-					<md-input-container>
-							<label>Search</label>
-							<input ng-model="user.name" type="text">
-					</md-input-container>
-
-			</md-content>
-			<md-content>
-				<md-list layout-align="space-around">
-					<md-list-item class="md-2-line" ng-repeat="movie in movieEntries">
-						<md-card layout="row" style="width:75%">
-							<md-card-title layout="row" layout-align="space-around start">
-								<md-card-title-media>
-									<div class="md-media-lg card-media card-picture">
-										<img ng-src="{{movie.image}}" />	
-									</div>
-								</md-card-title-media>
-								<md-card-title-text>
-									<span class="md-headline">{{movie.title}} </span>
-									<span class='md-subhead'> {{movie.rating}}</span>
-								</md-card-title-text>
-							</md-card-title>
-							<md-card-actions layout="row" layout-align="end center">
-	           			<md-button>Add to Watchlist</md-button>
-								</md-card-actions>
-						</md-card>
-										
-					</md-list-item>
-				</md-list>
-						
-			</md-content>
+		<div ui-view >
+			
 		</div>
 	</body>
 
